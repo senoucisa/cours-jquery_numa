@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Evenements Jequery</title>
+    <style>
+
+        .maClasse{
+            background-color: dodgerblue;
+            color: white;
+            border: 1px solid gray;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <h1>Evenements</h1>
+    <main>
+        <article>
+            <p style="display:none">Mon paragraphe</p>
+
+        </article>
+
+    </main>
+
+    <button id="button1">Click</button>
+    <button id="button2">Bouton 2</button>
+    <button id="button3">Bouton 3</button>
+    <button id="button4">Bouton 4 </button>
+    <button id="button5">ToggleClass</button>
+
+
+    <script src="../sources/jquery-3.4.1.js"></script>
+    <script>
+
+        $(document).ready(function(){ });
+        $(function(){
+            $('h1').append(' Javascript ');
+
+            $('#button1').click(function(){
+                alert('cliqué');
+                // Faire qu'au clic le texte h1 se souligne
+                $('h1').css("text-decoration","underline");
+            });
+
+            // Un double click sur le boutton2 engendre un changement de couleur du body
+
+            $('#button2').dblclick(function(){
+                alert('')
+                
+                $('body').css({"background":"pink", "font-family":"sans-serif"});
+                // Le mot clef "this"se refere à la selection active"$('#button2')".
+                
+                
+                $(this).css("display","none");
+
+            });
+
+            // $('#button3').toggle(
+            //     function(){
+            //         $('main').addClass('maClass');
+            //     },
+            //     function(){
+            //         $('main').removeClass('maClass');
+
+            //     }
+            // );
+
+            // $('#button3').mouseenter(function(){
+            //     $('main').addClass('maClass');
+
+            // });
+
+          
+            // $('#button3').mouseleave(function(){
+            //     $('main').removeClass('maClass');
+            // });
+
+            // La methode .hover()joue le role cumulé de mouseenter()et mouseleave()à travers 2 fonctions,la premiére s'éxécute au survol,la seconde à la sortie de l'élément visé.
+            $('#button3').hover(
+                    function(){
+                        $('main').addClass('maClasse');
+                    } ,
+                    function(){
+                        $('main').removeClass('maClasse');
+                    }
+                );
+
+                $('#button5').click(function(){
+                    $('h1').toggleClass('maClasse');
+
+                });
+
+                $('#button4').click(function(){
+                    $("p").toggle(2000);
+                });
+                // Methode .on()
+
+                    $('p').on("click",function(){
+                        $(this).append(' clic');
+                    });
+
+                    // contrainte:selectionner article,puis vous allez donner un contour à main.
+
+                        $('article').parent().css("border","2px solid red");
+                        $('article').find('p').css("margin","0");
+                        
+
+
+        });
+
+
+    </script>
+    
+</body>
+</html>

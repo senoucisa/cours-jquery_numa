@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Entrainement Jquery</title>
+    <style>
+        h2 {
+            border: 1ps solid gray;
+            margin: 0;
+            padding: 5px;
+        }
+
+        h2+div{
+            background: gray;
+            height: 200px;
+        }
+       #cube{
+           width: 100px;
+           height: 100px;
+           background: blue;
+           position:relative ;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1">
+        Contenu de ma div
+    </div>
+    <button id="b1" style="display:none">Show</button>
+    <button id="b2">Hide</button>
+    <button id="b3">Toggle</button>
+    <hr>
+    <div id="div2">
+        <p>Contenu de ma div2 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores aliquid tenetur quod repellendus laboriosam nam at eos amet est! Magnam quisquam consequuntur itaque fugit ducimus consectetur ex, aliquam natus maiores. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum labore, odio aliquid laboriosam cumque possimus cum incidunt, modi adipisci totam eveniet ex temporibus, ducimus quibusdam repudiandae excepturi! Voluptatem, excepturi quo! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam saepe perspiciatis quasi. Minima rem adipisci qui amet. Voluptas porro unde maiores vitae. Suscipit quis numquam illo et quibusdam sint nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum tempore commodi harum eius, amet eligendi nesciunt, autem deserunt placeat vel est deleniti cumque perferendis quam mollitia itaque et unde facere? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque quaerat illum officia deserunt omnis optio deleniti, consequuntur maxime pariatur, amet a soluta exercitationem molestiae blanditiis labore? Corrupti soluta incidunt tempore. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente atque molestias laudantium magni. Aliquid delectus quos vero dolor molestias, harum modi saepe excepturi at cum autem facere nam reiciendis beatae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui minima unde aspernatur sed alias vero commodi sint natus, quisquam repudiandae tempora inventore voluptate nesciunt illo quo quae? Corporis, beatae soluta!
+            <img src="../03-entrainement/b.jpg" alt="Mon image"
+            style="width:200px; float:left;">  Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi distinctio voluptas, nobis aperiam recusandae illo tenetur perferendis, tempore placeat id voluptatibus unde et aliquam quaerat deserunt dolorem nostrum blanditiis molestiae? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque debitis illum ex autem quia dolore? Temporibus ut, nam rem quidem amet ipsam perferendis laborum nesciunt id maiores illum eius quibusdam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque voluptatem autem cum molestias reiciendis consectetur non error, inventore iure libero facere. Iure nemo eos inventore delectus qui earum deserunt eum. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque, quis asperiores! Eum hic, quo consectetur porro non possimus laborum excepturi asperiores a ratione, sint repellendus, consequatur neque explicabo corporis impedit! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis ipsam voluptatem consectetur atque consequatur nam explicabo itaque mollitia minima, ut nihil molestiae dignissimos repellat, laudantium laboriosam necessitatibus culpa quaerat minus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, accusantium perferendis. Corrupti velit aliquam ratione dolorem facere! Ab placeat tempora dicta animi, rem eos, magni totam, eum vel omnis esse.
+        </p>
+
+    </div>
+
+    <button id="b4">fadeIn</button>
+    <button id="b5">fadeOut</button>
+    <button id="b6">fadeToggle</button>
+    <button id="b7">fadeTo</button>
+
+    <h2 id="titre1">Titre1</h2>
+    <div id="contenu1" style="display:none">Contenu1</div>
+
+    <h2 id="titre2">Titre2</h2>
+    <div id="contenu2">Contenu2</div>
+
+    <h2 id="titre3">Titre3</h2>
+    <div id="contenu3">Contenu3</div>
+    <hr>
+
+    <div id="cube"></div>
+
+
+
+
+
+
+
+
+    <script src="../sources/jquery-3.4.1.js"></script>
+    <script>
+
+
+            $(function(){
+                // Methode show()montre un élément si celui ci est display none(style="display:none;")
+                $('#b1').click(function(){
+                    $('#div1').show();
+                    $('#b1').hide();
+                    $('#b2').show();
+                });
+
+                // viser le b2 pour qu'il cache la div si elle est visible
+
+                $('#b2').click(function(){
+                    $('#div1').hide();
+                    $('#b2').hide();
+                    $('#b1').show();
+                });
+
+                $('#b3').click(function(){
+                    $('#div1').toggle();
+                });
+
+                // fadeToggle/fadeIn/fadeOut
+
+                $('#b4').click(function(){
+                    $('#div2').fadeIn(3000);
+                });
+
+                $('#b5').click(function(){
+                    $('#div2').fadeOut(1000);
+                });
+
+                // fadeToggle
+                $('#b6').click(function(){
+                    $('#div2').fadeToggle(3000, function(){
+                        alert('Animation terminée !');
+                    });
+                });
+
+                // fadeTo()
+                $('#b7').click(function(){
+                    $('#div2').fadeTo(2000, 0.5,function(){  
+                        alert('Animation terminée!!!') ;
+                    });
+                });
+
+                // effet slide
+
+                // slideDow
+                $('#titre1').click(function(){
+                    $('#contenu1').slideDown('slow',function(){
+                        alert('fini !');
+                    }); 
+                });
+                // slideUp
+
+                $('#titre2').click(function(){
+                    $('#contenu2').slideUp();
+                });
+                // slideToggle
+                $('#titre3').click(function(){
+                    $('#contenu3').slideToggle();
+                });
+
+                // animate()
+                $('#cube').on('click',function(){
+                    $(this).animate({'widht':'200px','height':'80px','left':'100px'});
+                });
+            });
+
+
+
+</script>
+    
+</body>
+</html>
