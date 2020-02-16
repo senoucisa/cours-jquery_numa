@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+     <!-- meta tags indispensables -->
+    <meta charset="UTF-8">
+    <!-- shrink-to-fit=no -->
+    <meta name= "viewport" content= "width=device-width, initial-scale=1, shrink-to-fit=no" > 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calculatrice-Jquery-numa-Bootstrap 4</title>
+    <link rel= "stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity= "sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin= "anonymous" > 
+   
+    <style>
+        body {
+            background: gray
+        }
+        
+    </style>
+
+</head>
+<body>
+
+   
+    <div class="container bg-white p-4 mt-4">
+
+        <div class="jumbotron">
+            <h1 class="display-4">Calculatrice & Bootstrap 4</h1>
+            <!-- badge badge-dark sert a encadrer le nom en noir -->
+            <a href="#"><p class="lead">Une calculatrice en Jquery-<span class="badge badge-dark">Numa Krouchi</span></p>
+            <hr class="my-4">
+        </a>
+        </div>
+        
+        <div class="p-4">
+            <button type="button" class="btn btn-success" id="afficher">Afficher</button>
+            <button type="button" class="btn btn-danger" id="cacher">Cacher</button>
+            <button type="button" class="btn btn-info" id="toggle">Toggle</button>
+            
+        </div>
+    
+    
+        
+        <div id="conteneur" class="bg-secondary rouned p-4">
+
+    
+            <form action="#" method="get" name="formulaire">
+                   <div class="row">
+                        <div class="col"> 
+                           <input type="number" class="form-control" name="saisie2" id="saisie2">
+                        </div>
+               
+                    <div class="col">
+                        <select class="form-control" name="operateur" id="operateur">
+                            <option>+</option>
+                            <option>-</option>
+                            <option>/</option>
+                            <option>*</option>
+                        </select>
+                    </div>
+        
+                       <div class="col"> 
+                           <input type="number" class="form-control" name="saisie2" id="saisie2">
+                        </div>
+                        <div class="col">
+                            <button type="submit" class=" form-control btn btn-primary" name="bouton" id="bouton" value="Calculez">Calculez</button>
+            
+                        </div>
+                   </div>
+            </form>
+    
+        </div>
+    </div>
+        <!-- jQuery doit venir en premier, puis Popper.js, puis nos plugins JavaScript. -->
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <!-- bibliotheque jquery(sans ça c'est pas la peine les kikis) -->
+
+    <script src="../sources/jquery-3.4.1.js"></script>
+
+    <script>
+
+        $(function(){
+            function calcul(event){
+                event.preventDefault();
+                // console.log('ca marche');
+
+                var saisie1 = $('#saisie1').val();
+                // console.log(saisie1);
+          
+
+
+            var saisie2 = $('#saisie2').val();
+                // console.log(saisie2);
+             
+            
+            var operateur = $('#operateur').val();
+                // console.log(operateur);
+
+                if(operateur == '+'){
+                    resultat = parseFloat(saisie1) + parseFloat(saisie2);
+                    // console.log(resultat);
+                }
+                if(operateur == '-'){
+                    resultat = (saisie1-saisie2);
+                    // console.log(resultat);
+                }
+                if(operateur == '/'){
+                    resultat = (saisie1/saisie2);
+                    // console.log(resultat);
+                }
+                if(operateur == '*'){
+                    resultat = (saisie1*saisie2);
+                    // console.log(resultat);
+                }
+                alert(saisie1  +" " + operateur + " " + saisie2 +  " = "  + resultat);
+           
+
+
+        };
+                $('#bouton').click(calcul);
+                $('#afficher').click(function(){
+                    $('#conteneur').slideDown();
+        });
+
+                $('#cacher').click(function(){
+                    $('#conteneur').slideUp();
+
+                });
+
+                $('#Toggle').click(function(){
+                    $('#conteneur').slideToggle();
+                })
+
+
+        });
+    </script>
+</body>
+
+</html>
