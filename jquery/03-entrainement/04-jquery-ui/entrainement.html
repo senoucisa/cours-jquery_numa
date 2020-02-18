@@ -7,6 +7,7 @@
     <title>Entrainement-Jquery ui</title>
     <!-- css de jquery ui -->
     <link rel="stylesheet" href="jquery-ui.css">
+  
     <style>
         .nouvelleClasse{
             font-size: 30px;color: skyblue;
@@ -31,6 +32,85 @@
                 background: tomato;
                 border: 1px solid tomato;
             }
+
+            /* Droppable */
+            #joueur {
+              width: 50%;
+              border: 2px solid grey;
+              
+              
+              
+
+            }
+            #adversaire{
+              width: 200px;
+              height: 200px;
+              border: 2px solid black;
+              
+            }
+            #resizable {
+              width: 250px;
+              height: 250px;
+              border: 1px solid ;
+              
+              
+              background: rgba(169,3,41,1);
+              background: -moz-linear-gradient(left, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 92%, rgba(109,0,25,1) 100%);
+              background: -webkit-gradient(left top, right top, color-stop(0%, rgba(169,3,41,1)), color-stop(92%, rgba(143,2,34,1)), color-stop(100%, rgba(109,0,25,1)));
+              background: -webkit-linear-gradient(left, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 92%, rgba(109,0,25,1) 100%);
+              background: -o-linear-gradient(left, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 92%, rgba(109,0,25,1) 100%);
+              background: -ms-linear-gradient(left, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 92%, rgba(109,0,25,1) 100%);
+              background: linear-gradient(to right, rgba(169,3,41,1) 0%, rgba(143,2,34,1) 92%, rgba(109,0,25,1) 100%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019', GradientType=1 );
+              -webkit-box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.75);
+              -moz-box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.75);
+              box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.75);
+
+ 
+             
+             
+            }
+            #resizable h5 {
+              background: lightgray;
+              text-align: center;
+              margin: 0;
+              padding: 10px;
+              
+            }
+            .ui-resizable-helper { border: 1px dotted gray; }
+
+            /* Selectable */
+            /* classe du parent (la liste:OL)*/
+            .ui-selectable{
+              list-style: none;
+              padding: 0;
+              margin: 0;
+            }
+            /* classe de l'élément selectionnable par defaut */
+            .ui-selectee {
+              background: grey;
+              color: white;
+              padding: 5px 10px;
+              border: 1px solid black;
+              width: 150px;
+              text-align: center;
+            }
+            /* classe de l'élément en train d'etre cliqué */
+            .ui-selecting{
+              background: #bbb;
+            }
+            /* classe de l'élément une fois cliqué */
+            .ui-selected {
+              background: #222;
+              color:#fff;
+            }
+            #selectable{
+              margin-left: 20px;
+              margin-bottom: 100px;
+              
+            }
+
+            
       
     </style>
     
@@ -128,15 +208,55 @@
 <img id="image6" src="img/cheval_06.jpg" alt="cheval">
 </div>
 
+<div style="border:5px solid blue; height:80vh; display: flex; flex-wrap: wrap; justify-content: space-between;">
+  <h4 style="width:100%;">Droppable ( )</h4>
+
+    <div id="joueur">
+      <img id="pierre"src="img/pierre.png" alt="Pierre">
+      <img id="ciseaux"src="img/ciseaux.png" alt="Ciseaux">
+      <img id="feuille"src="img/feuille.png" alt="Feuille">
+  
+    </div>
+  
+    <div id="adversaire">
+      <img id="img_adv" src="img/ciseaux.png" alt="Ciseaux">
+  
+    </div>
+    <div id="ecran"></div>
+</div>
+<hr>
+<div id="parent" style="border:5px solid blue; height:80vh;">
+<h4>Resizable</h4>
+
+ 
+<div id="resizable">
+  <h5>Redimensionnez-moi !</h5>
+</div>
+</div>
+<hr>
+<h4>Selectable</h4>
+<ol id="selectable">
+  <li>Element 1</li>
+  <li>Element 2</li>
+  <li>Element 3</li>
+  
+</ol>
+<hr>
+<!-- <input type="date"> le date picker vient en remplacement du (input type date)  tant que tous les navigateurs ne permettent pas son utilisation.-->
+<h4>Date picker</h4>
+<input type="text" id="input" placeholder="Cliquez pour choisir une date">
+<hr>
+<hr>
+<h4>Autocomplete</h4>
+<input type="text" id="autocomplete">
+
+
+
+  
+
 
  
 
-  
-   
-   
-   
-  
-  
     <!-- script de jquery -->
     <script src="jquery-3.4.1.js"></script>
     <!-- script de jqueru-ui -->
@@ -199,12 +319,96 @@
     $('img').mouseup(function(){
       $(this).css('cursor','grab');
     });
+
+    // DROPPABLE
+    // 1er manière
+    // $('#pierre').draggable();
+    // $('#feuille').draggable();
+    // $('#ciseaux').draggable();
+
+    // 2eme manière 
+
+    $('#pierre, #feuille, #ciseaux').draggable({
+      revert:"invalid"
+    });
+    $('#adversaire').droppable({
+      accept:"#feuille, #pierre",
+      drop:function(evenement, element){
+        // alert('J\'accepte ces éléments');
+        if(element.draggable.is("#pierre")){
+          alert('Gagné');
+          $(this).css("background","purple");
+          $('#ecran').html('<img src="img/cheval_01.jpg" alt"cheval">')
+        }else{
+          alert('perdu');
+          $(this).css("background" ,"black");
+        }
+      }
+    });
+
+    // mettre en place un droppable sur le cadre gris (#joueur)pour pouvoir y renvoyer feuille et pierre
+    $('#joueur').droppable({
+      accept:"#feuille,#pierre",
+      drop:function(){
+        $(this).css("background","lightgrey");
+        
+      }
+    });
+    // function direBonjour(prenom){
+    //   document.write('Bonjour '  +  'prenom');
+    // }
+
+    // direBonjour('Samia');
+    $( function() {
+    $( "#resizable" ).resizable({
+      animate:true,
+      containment:"#parent",
+      maxHeight: 650,
+      maxWidth: 500,
+      minHeight: 250,
+      minWidth: 250,
+      aspectRatio:1/1,
+    
+    }); 
+  } );
+  // Selectable
+  $("#selectable").selectable( {
+    stop:function(){
+      // alert('selection effectuée')
+      $('ui-selected').text();
+      console.log($('.ui-selected').text());
+    }
+  });
+
+  // DATEPICKER
+  $('#input').datepicker({
+    monthNames:[ "Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"],
+    dayNames:[ "Lundi","Mardi", "Mercredi", "Jeudi","Vendredi","Samedi","Dimanche"],
+    dayNamesMin:[ "Di", "Lu","Ma","Me","Je","Ve","Sa","Di"],
+    dateFormat:"dd -mm -yy",
+    firstDay: 1,
+    // showButtonPanel: true
+  });
+
+  // AUTOCOMPLETE
+  var  mesTags =[
+      "Paris",
+      "Nantes","Nice",
+      "Lyon",
+      "Lille",
+      "Bordeaux",
+      "Marseille"
+  ]
+  $('#autocomplete').autocomplete({
+      source:mesTags
+  });
+
+
+  
+  
      
     });
   
-  
-  
-
   </script>
     
     
